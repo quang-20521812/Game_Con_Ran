@@ -42,6 +42,17 @@ while True:
     if direction == 'RIGHT':
         snake_position[0] += 10
 
+    snake_body.insert(0, list(snake_position))
+
+    snake_body.pop()
+
+    game_window.fill(pink)
+
+    for pos in snake_body:
+        pygame.draw.rect(game_window, green,
+                         pygame.Rect(pos[0], pos[1], 10, 10))
+    pygame.draw.rect(game_window, orange, pygame.Rect(
+        food_position[0], food_position[1], 10, 10))
 
     # Cập nhật lại nội dung toàn màn hình game
     pygame.display.flip()
