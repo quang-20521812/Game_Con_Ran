@@ -43,7 +43,6 @@ while True:
         snake_position[0] += 10
 
 
-
     # Cập nhật lại nội dung toàn màn hình game
     pygame.display.flip()
 
