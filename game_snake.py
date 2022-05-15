@@ -36,6 +36,16 @@ food_position = [random.randrange(12, (window_x // 10)) * 10,
 # Bên Phải
 direction = 'RIGHT'
 
+# Hàm kết thúc game
+def game_over():
+    pygame.display.flip()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE or event.key == pygame.K_ESCAPE:
+                    pygame.quit() 
+                    quit()
+
 # Hàm main
 while True:
 
@@ -53,6 +63,12 @@ while True:
                          pygame.Rect(pos[0], pos[1], 10, 10))
     pygame.draw.rect(game_window, orange, pygame.Rect(
         food_position[0], food_position[1], 10, 10))
+
+    # Kết thúc game nếu chạm vào 4 cạnh của cửa sổ
+    if snake_position[0] < 0 or snake_position[0] > window_x-10:
+        game_over()
+    if snake_position[1] < 0 or snake_position[1] > window_y-10:
+        game_over()
 
     # Cập nhật lại nội dung toàn màn hình game
     pygame.display.flip()
