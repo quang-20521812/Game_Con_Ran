@@ -1,18 +1,7 @@
+# Khai báo các thư viện
 import pygame
-import time
 import random
-
-pygame.init()
-
-orange = pygame.Color(247, 114, 5)
-game= pygame.display.set_mode((720,480))
-game.fill((255,255,255))
-
-x = [[120,50], [110,50], [100,50]]
-
-for pos in x:   
-    pygame.draw.rect(game, orange, pygame.Rect(pos[0],pos[1],10,10))
-
+import time
 
 # Kích cỡ của cửa sổ game khi chạy
 window_x = 720
@@ -22,6 +11,9 @@ window_y = 480
 green = pygame.Color(3, 171, 12)
 orange = pygame.Color(247, 114, 5)
 pink = pygame.Color(240, 170, 234)
+
+# Khởi tạo pygame
+pygame.init()
 
 # Khởi tạo cửa sổ game
 pygame.display.set_caption('Green Snakes')
@@ -34,21 +26,37 @@ fps = pygame.time.Clock()
 snake_position = [70, 270]
 
 # Mặc định chiều dài của rắn là 3
-snake_body = [[70,270], [60,270], [50,270]]
-            
-# Vị trí thức ăn
-food_position = [random.randrange(12, (window_x//10)) * 10,
-                random.randrange(3, (window_y//10)) * 10]
-        
-game_window.fill(pink)
+snake_body = [[70, 270], [60, 270], [50, 270]]
 
-for pos in snake_body:
-    pygame.draw.rect(game_window, green,
-                        pygame.Rect(pos[0], pos[1], 10, 10))
+# Vị trí thức ăn
+food_position = [random.randrange(12, (window_x // 10)) * 10,
+                 random.randrange(3, (window_y // 10)) * 10]
+
+# Mặc định hướng đi lúc ban đầu của con rắn
+# Bên Phải
+direction = 'RIGHT'
+
+# Hàm main
+while True:
+
+    if direction == 'RIGHT':
+        snake_position[0] += 10
+
+    snake_body.insert(0, list(snake_position))
+
+    snake_body.pop()
+
+    game_window.fill(pink)
+
+    for pos in snake_body:
+        pygame.draw.rect(game_window, green,
+                         pygame.Rect(pos[0], pos[1], 10, 10))
     pygame.draw.rect(game_window, orange, pygame.Rect(
         food_position[0], food_position[1], 10, 10))
 
-# Cập nhật lại nội dung toàn màn hình game
-pygame.display.flip()
+    # Cập nhật lại nội dung toàn màn hình game
+    pygame.display.flip()
 
-time.sleep(5)
+    # Thiết lập tốc độ rắn thông qua thời gian chuyển khung hình 
+    fps.tick(12)
+
