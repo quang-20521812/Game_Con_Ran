@@ -39,6 +39,25 @@ produce_food = True
 direction = 'RIGHT'
 change_to = direction
 
+# Điểm số lúc ban đầu
+score = 0
+
+# Chức năng hiển thị điểm số
+def show_score(choice, color, font, size):
+
+    # Thiết lập phông chữ cho thông báo điểm
+    score_font = pygame.font.SysFont(font, size)
+    
+    # Viết dòng thông báo điểm
+    score_surface = score_font.render('Score : ' + str(score), True, color)
+    
+    # Tạo khối hcn cho điểm
+    score_rect = score_surface.get_rect()
+    
+    # Hiển thị điểm
+    game_window.blit(score_surface, score_rect)
+
+
 # Hàm kết thúc game
 def game_over():
     pygame.display.flip()
@@ -119,6 +138,9 @@ while True:
     for block in snake_body[1:]:
         if snake_position[0] == block[0] and snake_position[1] == block[1]:
             game_over()
+
+    # Hiển thị và cập nhật điểm số ở góc trái trên màn hình
+    show_score(1, white, 'Jumble', 40)
 
     # Cập nhật lại nội dung toàn màn hình game
     pygame.display.flip()
