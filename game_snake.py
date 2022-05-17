@@ -114,6 +114,11 @@ while True:
         game_over()
     if snake_position[1] < 0 or snake_position[1] > window_y-10:
         game_over()
+        
+    # Kết thúc game nếu rắn chạm vào chính nó    
+    for block in snake_body[1:]:
+        if snake_position[0] == block[0] and snake_position[1] == block[1]:
+            game_over()
 
     # Cập nhật lại nội dung toàn màn hình game
     pygame.display.flip()
